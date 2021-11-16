@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kroger.desp</groupId>
+    <artifactId>desp-producer-consumer-quick-start</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>desp-producer-consumer-quick-start</name>
+    <description>This is a spring boot, spring kafka project
+        quick starter for DESP
+    </description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <confluent.version>5.5.0</confluent.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cloud-connectors</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-streams-avro-serde</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-schema-registry</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>monitoring-interceptors</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>com.kroger.desp-utilities</groupId>
+            <artifactId>kafka-client</artifactId>
+            <version>3.7.3</version>
+        </dependency>
+        -->
+
+
+        <dependency>
+            <groupId>com.kroger.desp-utilities</groupId>
+            <artifactId>kafka-client</artifactId>
+            <version>3.7.4</version>
+        </dependency>
+
+        <!--
+
+        <dependency>
+            <groupId>com.kroger.desp-utilities</groupId>
+            <artifactId>kafka-client</artifactId>
+            <version>3.7.4</version>
+            <scope>system</scope>
+            <systemPath>/Users/dc24863/dev/supplychain/desp-kafka-client-utilities/build/libs/kafka-client-3.7.4.jar</systemPath>
+        </dependency>
+                -->
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kroger.desp-catalog.desp-elmr</groupId>
+            <artifactId>test</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kroger.desp-catalog.desp-health-check</groupId>
+            <artifactId>healthcheck</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <snapshots/>
+            <id>artsnapshots</id>
+            <name>libs-release</name>
+            <url>http://packages.confluent.io/maven</url>
+        </repository>
+        <repository>
+            <id>maven-repository</id>
+            <url>file:///${project.basedir}/maven-repository</url>
+        </repository>
+        <!--repository>
+            <snapshots/>
+            <id>dcpsnapshot</id>
+            <name>dcp-snapshot</name>
+            <url>http://artifactory.kroger.com/artifactory/kroger-dcp</url>
+        </repository-->
+    </repositories>
+    <!--pluginRepositories>
+        <pluginRepository>
+            <id>plugins</id>
+            <name>plugins-release</name>
+            <url>http://artifactory.kroger.com/artifactory/plugins-release</url>
+        </pluginRepository>
+    </pluginRepositories-->
+</project>

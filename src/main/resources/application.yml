@@ -1,0 +1,70 @@
+
+#  These default event hubs configurations were based on recommendations found here:
+#  https://github.com/Azure/azure-event-hubs-for-kafka/blob/master/CONFIGURATION.md
+#
+spring:
+  kafka:
+    properties:
+      metadata.max.age.ms: 180000
+      connections.max.idle.ms: 180000
+    producer:
+      properties:
+        max.send.attempts: 5
+        delivery.timeout.ms: 60100
+        max.request.size: 1000000
+        request.timeout.ms: 60000
+        metadata.max.idle.ms: 180000
+        linger.ms: 100
+    consumer:
+      properties:
+        heartbeat.interval.ms: 3000
+        session.timeout.ms: 30000
+        max.poll.interval.ms: 300000
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      group-id: ${QUICK_START_CONSUMER_GROUP}
+      filter-config:
+        headers:       # the following filter will based on eventType header key
+          eventType:   # only Values TestEvent and CoolThingHappened will be deserialized
+            - TestEvent
+            - CoolThingHappened
+
+
+threadpool:
+  executor:
+    corePoolSize: 150
+    maxPoolSize: 200
+    queueCapacity: 1000
+
+target-topic: ${EVENTHUB_TOPIC}
+
+---
+
+
+spring:
+  profiles: eventhub_oauth
+  kafka:
+    bootstrap-servers: ${EVENTHUB_NAMESPACE}.servicebus.windows.net:9093
+    schema-registry-url: ${SCHEMA_REGISTRY_URL}
+    security-protocol: SASL_SSL
+    schema-registry-secret: ${SCHEMA_REGISTRY_SECRET}
+    consumer:
+      max-retry-attempts: 3
+      retry-backoff-in-seconds: 5
+      auto-offset-reset: latest
+      sasl-mechanism: OAUTHBEARER
+      enable-auto-commit: false
+      o-auth-config:
+        consumer-client-id: ${OAUTH_CLIENT_ID}
+        consumer-tenant-id: ${OAUTH_TENANT_ID}
+        consumer-client-key: ${OAUTH_CLIENT_KEY}
+    producer:
+      sasl-mechanism: OAUTHBEARER
+      acks: all
+      o-auth-config:
+        producer-client-id: ${OAUTH_CLIENT_ID}
+        producer-tenant-id: ${OAUTH_TENANT_ID}
+        producer-client-key: ${OAUTH_CLIENT_KEY}
+        #producer-msi-enabled: true
+
+
